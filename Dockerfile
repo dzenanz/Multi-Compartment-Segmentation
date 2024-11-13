@@ -30,12 +30,16 @@ RUN dpkg --add-architecture amd64 && \
     cmake \
     libxml2-dev \
     libxslt-dev \
-    python3-lxml \
-    ffmpeg \
-    libsm6 \
-    libxext6 && \
+    gcc \
+    && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python3 get-pip.py \
+    && python3 -m pip install lxml==5.2.1 &&\
+    # ffmpeg \
+    # libsm6 \
+    # libxext6 && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+
 
 WORKDIR /
 
@@ -66,8 +70,6 @@ RUN export CFLAGS="-Wno-incompatible-function-pointer-types -Wno-implicit-functi
 # Install packages in virtual environment with system lxml
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     # Try to install a specific version of lxml that's known to work
-    #pip install --no-cache-dir -f https://wheels.galaxyproject.org/packages/ lxml && \
-    # Continue with other installations
     pip install --no-cache-dir . && \
     pip install --no-cache-dir cuda-python==12.4.0 && \
     pip install --no-cache-dir tensorboard cmake onnx && \
