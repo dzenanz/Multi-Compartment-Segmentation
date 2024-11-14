@@ -20,6 +20,7 @@ from skimage.filters import gaussian
 
 
 NAMES = ['cortical_interstitium','medullary_interstitium','non_globally_sclerotic_glomeruli','globally_sclerotic_glomeruli','tubules','arteries/arterioles']
+FILTER = ['non_globally_sclerotic_glomeruli','globally_sclerotic_glomeruli']
 XML_COLOR = [65280, 16776960,65535, 255, 16711680, 33023]
 
 """
@@ -226,7 +227,7 @@ def xml_suey(wsiMask, args, classNum, downsample,glob_offset):
 
     for value in np.unique(unique_mask)[1:]:
         # print output
-        print('\t working on: annotationID ' + str(value))
+        # print('\t working on: annotationID ' + str(value))
         # get only 1 class binary mask
         binary_mask = np.zeros(np.shape(wsiMask),dtype='uint8')
         binary_mask[wsiMask == value] = 1
@@ -238,6 +239,11 @@ def xml_suey(wsiMask, args, classNum, downsample,glob_offset):
             Annotations = xml_add_region(Annotations=Annotations, pointList=pointList, annotationID=value)
     gc = args.gc
     annots = convert_xml_json(Annotations, NAMES)
+    new_annots = []
+    for annot in annots:
+        if annot['name'] in FILTER:
+            new_annots.append(annot)
+    annots = new_annots
     output_files = []
     output_dir = '/tmp'
     print('uploading layers')
