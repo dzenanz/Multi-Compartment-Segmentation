@@ -70,9 +70,9 @@ def predict(args):
 
     print('Building network configuration ...\n')
     
-    #TF32 format accelarates GPU processing on A100 by 20x. 
-    torch.backends.cuda.matmul.allow_tf32 = True  
-    torch.backends.cudnn.allow_tf32 = True
+    #TF32 format accelarates GPU processing on A100 by 20x with a very slight hit to accuarcy. 
+    # torch.backends.cuda.matmul.allow_tf32 = True  
+    # torch.backends.cudnn.allow_tf32 = True
     torch.cuda.empty_cache()  
     
     cfg = get_cfg()
@@ -82,7 +82,7 @@ def predict(args):
     cfg.MODEL.ANCHOR_GENERATOR.ASPECT_RATIOS = [[.1,.2,0.33, 0.5, 1.0, 2.0, 3.0,5,10]]
     cfg.MODEL.ANCHOR_GENERATOR.ANGLES=[-90,-60,-30,0,30,60,90]
     cfg.DATALOADER.NUM_WORKERS = 2  # Reduced from 10 to minimize CPU usage
-    cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 512  # Increased for A100
+    cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128  # Increased for A100
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS=False
     
     if not args.Mag20X:
