@@ -128,7 +128,6 @@ RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5
     rm -rf /root/.cache/pip/*
 
 RUN python --version && pip --version && pip freeze
-RUN python -c "print(torch.cuda.is_available())"
 
 WORKDIR $mc_path/multic/cli
 LABEL entry_path=$mc_path/multic/cli
