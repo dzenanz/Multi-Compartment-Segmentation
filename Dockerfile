@@ -43,7 +43,7 @@ RUN apt-get update && \
     libexpat1-dev \
     unzip \
     libhdf5-dev \
-    libpython2-dev \
+    libpython-dev \
     libpython3-dev \
     python2.7-dev \
     python-tk \
