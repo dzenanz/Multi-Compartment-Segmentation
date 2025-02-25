@@ -67,6 +67,7 @@ RUN apt-get update && \
     #apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
 CMD echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHECKPOINT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 RUN apt-get update ##[edited]
@@ -121,11 +122,22 @@ WORKDIR $mc_path
 RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5.1 && \
     pip install --no-cache-dir .  && \
     pip install --no-cache-dir tensorboard cmake onnx && \
-    pip install --no-cache-dir torch==2.0.1 torchaudio==2.0.1 torchvision==0.15.2 -f https://download.pytorch.org/whl/cu118/torch_stable.html && \
-    python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu118/torch2.0/index.html && \
-    rm -rf /root/.cache/pip/*
-    
+    pip install --no-cache-dir torch==2.0.1 torchaudio==2.0.1 torchvision==0.15.2 -f https://download.pytorch.org/whl/cu118/torch_stable.html
+
+RUN git clone 'https://github.com/facebookresearch/detectron2' && \
+    cd detectron2 && \
+    # Step 2: Install dependencies using setup.py
+    python3 -m pip install -r requirements.txt && \
+    # Step 3: Run setup.py to install the package
+    python3 setup.py install && \
+    # Optional: Add the Detectron2 path to Python's sys.path
+    echo "sys.path.insert(0, os.path.abspath('./detectron2'))" >> ~/.bashrc
+
+    # Clean up
+RUN rm -rf /root/.cache/pip/*
+
 RUN python --version && pip --version && pip freeze
+RUN python -c "print(torch.cuda.is_available())"
 
 WORKDIR $mc_path/multic/cli
 LABEL entry_path=$mc_path/multic/cli
