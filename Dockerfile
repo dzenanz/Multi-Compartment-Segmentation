@@ -119,11 +119,11 @@ RUN apt-get update && \
 COPY . $mc_path/
 WORKDIR $mc_path
 
-RUN pip install --upgrade --ignore-installed pip setuptools==69.5.1 && \
-    pip install .  && \
-    pip install tensorboard cmake onnx && \
-    pip install torch==2.0.1 torchvision==0.15.2 -f https://download.pytorch.org/whl/cu118/torch_stable.html && \
-    pip install torchaudio==2.0.1 && \
+RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5.1 && \
+    pip install --no-cache-dir .  && \
+    pip install --no-cache-dir tensorboard cmake onnx && \
+    pip install --no-cache-dir torch==2.0.1 torchvision==0.15.2 -f https://download.pytorch.org/whl/cu118/torch_stable.html && \
+    pip install --no-cache-dir torchaudio==2.0.1 && \
     python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html && \
     rm -rf /root/.cache/pip/*
 
