@@ -7,7 +7,7 @@
 
 # start from nvidia/cuda 10.0
 # FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
-FROM nvidia/cuda:12.4.0-base-ubuntu18.04
+FROM nvidia/cuda:12.4.0-base-ubuntu20.04
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
 LABEL maintainer="Sayat Mimar - Sarder Lab. <sayat.mimar@ufl.edu>"
