@@ -7,7 +7,7 @@
 
 # start from nvidia/cuda 10.0
 # FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
-FROM nvidia/cuda:11.8.0-base-ubuntu18.04
+FROM nvidia/cuda:12.4.0-base-ubuntu18.04
 LABEL com.nvidia.volumes.needed="nvidia_driver"
 
 LABEL maintainer="Sayat Mimar - Sarder Lab. <sayat.mimar@ufl.edu>"
@@ -121,8 +121,8 @@ WORKDIR $mc_path
 
 RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5.1 && \
     pip install --no-cache-dir .  && \
-    pip install --no-cache-dir tensorboard cmake onnx && \
-    pip install --no-cache-dir torch==2.0.1 torchaudio==2.0.2 torchvision==0.15.2 -f https://download.pytorch.org/whl/cu118/torch_stable.html && \
+    pip install --no-cache-dir tensorboard cmake onnx && \ 
+    pip install --no-cache-dir torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu124 && \
     python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html && \
     rm -rf /root/.cache/pip/*
 
