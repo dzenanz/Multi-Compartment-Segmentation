@@ -71,7 +71,7 @@ def predict(args):
 
     print('Building network configuration ...\n')
 
-    os.environ["CUDA_VISIBLE_DEVICES"]="0"
+    os.environ["CUDA_VISIBLE_DEVICES"]=str(args.gpu)
     
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("COCO-PanopticSegmentation/panoptic_fpn_R_50_3x.yaml"))

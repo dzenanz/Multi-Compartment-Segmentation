@@ -4,7 +4,7 @@ from ctk_cli import CLIArgumentParser
 import girder_client
 sys.path.append('..')
 from segmentationschool.segmentation_school import run_it
-
+import torch
 
 DEFAULT_VALS = {
         'girderApiUrl':' ',
@@ -28,7 +28,19 @@ DEFAULT_VALS = {
 def main(args):
     for name, value in os.environ.items():
         print(f"{name}={value}")
+    
+    # Check if CUDA GPUs is available
     print(f"CUDAENV = {os.getenv('CUDA_VISIBLE_DEVICES')}")
+    print(f"Allocated {torch.cuda.device_count()} cuda devices")
+    print(f"CUDA device name: {torch.cuda.get_device_name()}")
+    print(f"GPU is available: {torch.cuda.is_available()}")
+
+    # If GPU available, or use cpu and set as args.gpu
+    if torch.cuda.is_available():
+        args.gpu = 0
+    else:
+        args.gpu = -1
+        
     gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)
     gc.setToken(args.girderToken)
 
@@ -69,6 +81,7 @@ def main(args):
     setattr(args,'item_id', item_id)
     setattr(args,'file', file_path)
     setattr(args,'gc', gc)
+
 
     print(vars(args))
     for d in vars(args):
