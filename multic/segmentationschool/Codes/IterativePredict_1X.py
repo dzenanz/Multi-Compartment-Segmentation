@@ -83,6 +83,7 @@ def predict(args):
     cfg.DATALOADER.NUM_WORKERS = 10
     cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128   # faster, and good enough for this toy dataset (default: 512)
     cfg.DATALOADER.FILTER_EMPTY_ANNOTATIONS=False
+    cfg.MODEL.DEVICE= 'cuda' if args.gpu != -1 else 'cpu'
     if not args.Mag20X:
         cfg.INPUT.MIN_SIZE_TEST=region_size
         cfg.INPUT.MAX_SIZE_TEST=region_size
