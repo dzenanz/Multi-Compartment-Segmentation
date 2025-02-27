@@ -1,10 +1,10 @@
-import torch
-from segmentationschool.segmentation_school import run_it
 import os
 import sys
 from ctk_cli import CLIArgumentParser
 import girder_client
 sys.path.append('..')
+from segmentationschool.segmentation_school import run_it
+import torch
 
 DEFAULT_VALS = {
     'girderApiUrl': ' ',
