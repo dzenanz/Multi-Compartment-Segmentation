@@ -322,7 +322,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample,glob_offset):
     annots = convert_xml_json(Annotations, NAMES)
     for annot in annots:
         _ = gc.post(path='annotation',parameters={'itemId':item_dict[file_name]}, data = json.dumps(annot))
-        print('uploating layers')
+        print('uploading layers')
     print('annotation uploaded...\n')
 
 
