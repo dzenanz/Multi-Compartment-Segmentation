@@ -113,6 +113,7 @@ def savetime(args, starttime):
 
 
 if __name__ == '__main__':
+    print(f"Command line arguments [DEBUG]:\n{sys.argv}")
     parser = argparse.ArgumentParser()
 
     ##### Main params (MANDITORY) ##############################################
