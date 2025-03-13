@@ -6,9 +6,9 @@ def main(args):
 
     folder = args.base_dir
     base_dir_id = folder.split('/')[-2]
-    _ = os.system("printf '\nUsing data from girder_client Folder: {}\n'".format(folder))
+    _ = os.system("echo '\nUsing data from girder_client Folder: {}\n'".format(folder))
     print('new version')
-    _ = os.system("printf '\n---\n\nFOUND: [{}]\n'".format(args.input_file))
+    _ = os.system("echo '\n---\n\nFOUND: [{}]\n'".format(args.input_file))
 
     cwd = os.getcwd()
     print(cwd)

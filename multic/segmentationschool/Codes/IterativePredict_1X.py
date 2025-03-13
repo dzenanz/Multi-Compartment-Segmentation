@@ -306,7 +306,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample,glob_offset):
     # save xml
     folder = args.base_dir
     girder_folder_id = folder.split('/')[-2]
-    _ = os.system("printf 'Using data from girder_client Folder: {}\n'".format(folder))
+    _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
     print(file_name)
     gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)

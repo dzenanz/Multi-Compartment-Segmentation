@@ -119,7 +119,7 @@ def IterateTraining(args):
 
     
 
-    _ = os.system("printf '\nTraining starts...\n'")
+    _ = os.system("echo '\nTraining starts...\n'")
     cfg = get_cfg()
     cfg.merge_from_file(model_zoo.get_config_file("COCO-PanopticSegmentation/panoptic_fpn_R_50_3x.yaml"))
     cfg.DATASETS.TRAIN = ("my_dataset")
@@ -190,7 +190,7 @@ def IterateTraining(args):
     trainer.resume_or_load(resume=False)
     trainer.train()
 
-    _ = os.system("printf '\nTraining completed!\n'")
+    _ = os.system("echo '\nTraining completed!\n'")
 
 def mask2polygons(mask):
     annotation=[]

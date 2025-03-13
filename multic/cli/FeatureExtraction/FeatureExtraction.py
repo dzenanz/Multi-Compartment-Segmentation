@@ -33,12 +33,12 @@ NAMES = ['non_globally_sclerotic_glomeruli','globally_sclerotic_glomeruli','tubu
 def main(args):
 
     file = args.input_file
-    _ = os.system("printf 'Using data from girder_client file: {}\n'".format(file))
+    _ = os.system("echo 'Using data from girder_client file: {}\n'".format(file))
     file_name = file.split('/')[-1]
     plain_name = file_name.split('.')[0]
     folder = args.base_dir
     base_dir_id = folder.split('/')[-2]
-    _ = os.system("printf '\nUsing data from girder_client Folder: {}\n'".format(folder))
+    _ = os.system("echo '\nUsing data from girder_client Folder: {}\n'".format(folder))
 
     
     gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)
@@ -81,7 +81,7 @@ def main(args):
                    ['x1','x2','y1','y2','Arterial Area']]
     compart_names = ['gloms','s_gloms','tubs','arts']
     
-    _ = os.system("printf '\tWriting Excel file: [{}]\n'".format(args.output_filename))
+    _ = os.system("echo '\tWriting Excel file: [{}]\n'".format(args.output_filename))
     with pd.ExcelWriter(args.output_filename) as writer:
         for idx,compart in enumerate(all_comparts):
             df = pd.DataFrame(compart,columns=all_columns[idx])
