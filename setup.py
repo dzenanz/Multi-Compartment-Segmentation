@@ -50,7 +50,7 @@ setup(
         'Pillow==9.5.0',
         'pandas>=0.19.2',
         'imageio>=2.3.0',
-        # 'shapely[vectorized]',
+        'shapely[vectorized]==2.0.7',
         #'opencv-python-headless<4.7',
         #'sqlalchemy',
         # 'matplotlib',
