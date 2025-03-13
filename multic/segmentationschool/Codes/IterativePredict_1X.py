@@ -80,7 +80,7 @@ def predict(args):
         print('Building network configuration ...\n')
 
         os.environ["CUDA_VISIBLE_DEVICES"]="0"
-        
+
         cfg = get_cfg()
         cfg.merge_from_file(model_zoo.get_config_file("COCO-PanopticSegmentation/panoptic_fpn_R_50_3x.yaml"))
         cfg.MODEL.ANCHOR_GENERATOR.SIZES = [[32],[64],[128], [256], [512], [1024]]
@@ -164,7 +164,7 @@ def predict(args):
             totalpatches=len(index_x)*len(index_y)
             with tqdm(total=totalpatches,unit='image',colour='green',desc='Total WSI progress') as pbar:
                 for i,j in coordinate_pairs(index_y,index_x):
-            
+
                     yEnd = min(dim_y+offsety,i+region_size)
                     xEnd = min(dim_x+offsetx,j+region_size)
                     yStart_small = int(np.round((i-offsety)/resRatio))
@@ -202,12 +202,16 @@ def predict(args):
 
                         wsiMask[dyS:dyE,dxS:dxE]=np.maximum(maskpart,
                             wsiMask[dyS:dyE,dxS:dxE])
-                        
-                   
+
 
             slide.close()
-            print('\n\nStarting XML construction: ')
 
+            if args.base_dir and os.path.exists(args.base_dir):
+                mask_filename = args.base_dir + "/" + dirs['fileID'] + ".png"
+                print(f"Writing mask to file: {mask_filename}")
+                cv2.imwrite(mask_filename, wsiMask)
+
+            print('\n\nStarting XML construction: ')
             if extname=='.scn':
                 print('here writing 1')
                 xml_suey(wsiMask=wsiMask, dirs=dirs, args=args, classNum=classNum, downsample=downsample,glob_offset=[offsetx,offsety])
