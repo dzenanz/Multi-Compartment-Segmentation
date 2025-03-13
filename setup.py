@@ -80,7 +80,8 @@ setup(
         # cli
         'ctk-cli',
         'zarr<3.0',
-        'detectron2 @ git+https://github.com/facebookresearch/detectron2@main',  # v0.6+patches
+        # detectron2 is installed in the dockerfile, so it needs to be commented out here
+        # 'detectron2 @ git+https://github.com/facebookresearch/detectron2@main',  # v0.6+patches
     ],
     license='Apache Software License 2.0',
     keywords='multic',
