@@ -116,7 +116,8 @@ def predict(args):
 
             try:
                 slide=TiffSlide(wsi)
-            except:
+            except Exception as e:
+                print(f"Error opening slide {wsi}: {e}")
                 broken_slides.append(wsi)
                 continue
 
