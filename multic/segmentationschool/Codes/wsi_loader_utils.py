@@ -17,24 +17,13 @@ import multiprocessing
 from .xml_to_mask_minmax import write_minmax_to_xml
 import lxml.etree as ET
 
-MPP = {'V42D20-364_XY01_2235505.svs':0.25,
-    'V42D20-364_XY04_2240610.svs':0.25,
-    'V42N07-339_XY04_F44.svs':0.25,
-    'V42N07-395_XY01_235142.svs':0.25,
-    'V42N07-395_XY04_235582.svs':0.25,
-    'V42N07-399_XY01_3723.svs':0.25,
-    'XY01_IU-21-015F.svs':0.50,
-    'XY02_IU-21-016F.svs':0.50,
-    'XY03_IU-21-019F.svs':0.50,
-    'XY04_IU-21-020F.svs':0.50}
-
 
 def get_image_meta(i,args):
     image_annotation_info={}
     image_annotation_info['slide_loc']=i[0]
     slide=TiffSlide(image_annotation_info['slide_loc'])
-    magx=MPP[image_annotation_info['slide_loc'].split('/')[-1]]#np.round(float(slide.properties['tiffslide.mpp-x']),2)
-    magy=MPP[image_annotation_info['slide_loc'].split('/')[-1]]#np.round(float(slide.properties['tiffslide.mpp-y']),2)
+    magx=np.round(float(slide.properties['tiffslide.mpp-x']),2)
+    magy=np.round(float(slide.properties['tiffslide.mpp-y']),2)
  
     assert magx == magy
     if magx ==0.25:
@@ -116,8 +105,8 @@ def get_slide_data(args, wsi_directory=None):
                 slide =TiffSlide(slide_loc)
                 chop_array=get_choppable_regions(slide,args,slideID,slideExt,mask_out_loc)
 
-                mag_x=MPP[slideID+slideExt]#np.round(float(slide.properties['tiffslide.mpp-x']),2)
-                mag_y=MPP[slideID+slideExt]#np.round(float(slide.properties['tiffslide.mpp-y']),2)
+                mag_x=np.round(float(slide.properties['tiffslide.mpp-x']),2)
+                mag_y=np.round(float(slide.properties['tiffslide.mpp-y']),2)
                 slide.close()
                 tree = ET.parse(xmlpath)
                 root = tree.getroot()
