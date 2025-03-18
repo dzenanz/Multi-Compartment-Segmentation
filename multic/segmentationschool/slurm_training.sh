@@ -21,11 +21,11 @@ ls
 ml
 
 # Add your userid here:
-USER=sayat.mimar
+USER=Dzenan
 # Add the name of the folder containing WSIs here
 PROJECT=multic_segment
 
-CODESDIR=/blue/pinaki.sarder/sayat.mimar/Multi-Compartment-Segmentation/multic/segmentationschool
+CODESDIR=M:/Histo/Multi-Compartment-Segmentation/multic/segmentationschool
 
 DATADIR=$CODESDIR/TRAINING_data
 MODELDIR=$CODESDIR/pretrained_model
