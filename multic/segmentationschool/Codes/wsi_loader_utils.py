@@ -107,7 +107,7 @@ def get_slide_data(args, wsi_directory=None):
 
         usable_slides=[]
         for slide_loc in all_slides:
-            slideID,slideExt=os.path.splitext(slide_loc.split('/')[-1])
+            slideID,slideExt=os.path.splitext(slide_loc.split(os.sep)[-1])
             xmlpath=slide_loc.replace(slideExt,'.xml')
             if os.path.isfile(xmlpath):
                 write_minmax_to_xml(xmlpath)
