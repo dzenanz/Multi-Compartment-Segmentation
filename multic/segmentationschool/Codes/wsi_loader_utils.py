@@ -88,9 +88,9 @@ class WSITrainingLoader():
         print('Getting slide metadata and usable regions...')
 
         usable_slides=[]
-        for slide_loc in all_slides:
+        for iteration, slide_loc in enumerate(all_slides):
             slideID,slideExt=os.path.splitext(slide_loc.split(os.sep)[-1])
-            print("working slide... "+ slideID,end='\r')
+            print(f"slide {iteration + 1}/{len(all_slides)}: {slideID}" ,end='\r')
 
             slide=openslide.OpenSlide(slide_loc)
             chop_array=get_choppable_regions(slide,args,slideID,slideExt,mask_out_loc)
