@@ -1,6 +1,7 @@
 import os,cv2, time, random, multiprocessing,copy
 from skimage.color import rgb2hsv,hsv2rgb,rgb2lab,lab2rgb
 import numpy as np
+np.bool = np.bool_  # to avoid AttributeError: module 'numpy' has no attribute 'bool'.
 from tiffslide import TiffSlide
 from .xml_to_mask_minmax import xml_to_mask
 # from generateTrainSet import generateDatalists
