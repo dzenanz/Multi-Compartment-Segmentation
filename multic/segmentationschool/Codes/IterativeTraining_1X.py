@@ -110,7 +110,8 @@ def IterateTraining(args):
     MetadataCatalog.get("my_dataset").set(thing_classes=tc)
     MetadataCatalog.get("my_dataset").set(stuff_classes=sc)
 
-    usable_slides_val=get_slide_data(args, wsi_directory=dirs['val_data_dir'])
+    # usable_slides_val=get_slide_data(args, wsi_directory=dirs['val_data_dir'])
+    usable_slides_val = usable_slides.copy()
 
     usable_idx_val=range(0,len(usable_slides_val))
     slide_idxs_val=random.choices(usable_idx_val,k=int(args.batch_size*args.train_steps/100))
