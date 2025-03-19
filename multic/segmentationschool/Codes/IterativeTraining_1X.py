@@ -66,8 +66,8 @@ def IterateTraining(args):
 
     #os.environ["CUDA_VISIBLE_DEVICES"]=gpu
     #os.system('export CUDA_VISIBLE_DEVICES=$(nvidia-smi --query-gpu=memory.free,index --format=csv,nounits,noheader | sort -nr | head -1 | awk "{ print $NF }")')
-    os.environ["CUDA_VISIBLE_DEVICES"] ='2,3'
-    os.environ["CUDA_LAUNCH_BLOCKING"] ='1'
+    # os.environ["CUDA_VISIBLE_DEVICES"] ='2,3'
+    # os.environ["CUDA_LAUNCH_BLOCKING"] ='1'
 
 
     organType='kidney'
