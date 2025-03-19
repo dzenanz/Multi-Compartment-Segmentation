@@ -1,5 +1,6 @@
 import os, sys, cv2, time, random, warnings, multiprocessing#json,# detectron2
 import numpy as np
+np.bool = np.bool_  # to avoid AttributeError: module 'numpy' has no attribute 'bool'.
 import matplotlib.pyplot as plt
 import lxml.etree as ET
 from matplotlib import path

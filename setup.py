@@ -46,13 +46,15 @@ setup(
         # scientific packages
         'nimfa>=1.3.2',
         'numpy>=1.21.1,<2.0',
+        # 'numpy==1.23.1',  # last version before np.bool was deprecated (needed by imgaug)
         'scipy>=0.19.0',
         'Pillow==9.5.0',
         'pandas>=0.19.2',
         'imageio>=2.3.0',
         'shapely[vectorized]==2.0.7',
         'opencv-python-headless<4.7',
-        'imgaug==0.4.0',
+        # 'imgaug==0.4.0',
+        'imgaug @ git+https://github.com/aleju/imgaug@0101108d4fed06bc5056c4a03e2bcb0216dac326',  # 0.4.0+patches
         #'sqlalchemy',
         # 'matplotlib',
         'pyvips',
