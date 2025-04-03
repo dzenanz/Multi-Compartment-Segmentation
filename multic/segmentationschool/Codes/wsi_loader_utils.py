@@ -41,9 +41,9 @@ def get_image_meta(i,args):
     image_annotation_info['coordinates']=[i[2][1],i[2][0]]
     image_annotation_info['height']=dx
     image_annotation_info['width']=dy
-    image_annotation_info['image_id']=i[1].split('/')[-1].replace('.xml','_'.join(['',str(i[2][1]),str(i[2][0])]))
+    image_annotation_info['image_id']=i[1].split(os.sep)[-1].replace('.xml','_'.join(['',str(i[2][1]),str(i[2][0])]))
     image_annotation_info['xml_loc']=i[1]
-    image_annotation_info['file_name']=i[1].split('/')[-1]
+    image_annotation_info['file_name']=i[1].split(os.sep)[-1]
     slide.close()
     
     return image_annotation_info
@@ -63,7 +63,7 @@ def train_samples_from_WSI(args,image_coordinates):
     return data_list
 
 def WSIGridIterator(wsi_name,choppable_regions,index_x,index_y,region_size,dim_x,dim_y):
-    wsi_name=os.path.splitext(wsi_name.split('/')[-1])[0]
+    wsi_name=os.path.splitext(wsi_name.split(os.sep)[-1])[0]
     data_list=[]
     for idxy, i in tqdm(enumerate(index_y)):
         for idxx, j in enumerate(index_x):
