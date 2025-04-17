@@ -182,7 +182,7 @@ def IterateTraining(args):
 
     
     
-    #os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
+    os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
     with open(cfg.OUTPUT_DIR+"/config_record.yaml", "w") as f:
         f.write(cfg.dump())   # save config to file
 
