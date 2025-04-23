@@ -2,7 +2,7 @@ import numpy as np
 import lxml.etree as ET
 import cv2
 
-XML_COLOR = [65280, 16776960,65535, 255, 16711680, 33023]
+XML_COLOR = [65280, 16776960,65535, 255, 16711680, 33023, 16511]
 
 
 def get_contour_points(mask, args, downsample,value, offset={'X': 0,'Y': 0}):
