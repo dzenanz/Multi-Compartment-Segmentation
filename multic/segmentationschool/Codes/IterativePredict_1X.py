@@ -88,7 +88,7 @@ def predict(args):
         cfg.INPUT.MAX_SIZE_TEST=int(region_size/2)
     cfg.MODEL.WEIGHTS = args.modelfile
 
-    tc=['G','SG','T','A']
+    tc=['G','SG','T','A','IF']
     sc=['Ob','C','M','B']
     classNum=len(tc)+len(sc)-1
     cfg.MODEL.ROI_HEADS.NUM_CLASSES = len(tc)
@@ -107,7 +107,6 @@ def predict(args):
         slide=TiffSlide(wsi)
     except:
         raise Exception(f"The slide cannot be read!!")
-        
 
     if extname=='.scn':
         dim_y=int(slide.properties['openslide.bounds-height'])
