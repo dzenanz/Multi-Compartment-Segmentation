@@ -95,6 +95,7 @@ def get_slide_data(args, wsi_directory=None):
         print('Getting slide metadata and usable regions...')
 
         usable_slides=[]
+        missing_slides=[]
         iteration = 0
         for slide_loc in all_slides:
             iteration+=1
@@ -134,12 +135,15 @@ def get_slide_data(args, wsi_directory=None):
                     'xml_loc':xmlpath,'annotations':classNums,'root':root
                     })
             else:
-                print('\n')
-                print('no annotation XML file found for:')
-                print(slideID)
-                exit()
+                print(f'\nWarning: no annotation XML file found for:\n  {slideID}\n')
+                missing_slides.append(slideID)
 
         print('\n')
+        print('Number of usable slides: ',len(usable_slides))
+        print('Number of missing slides: ',len(missing_slides))
+        print('Missing slides:\n')
+        for i in missing_slides:
+            print(i)
         return usable_slides
 
 def get_random_chops(slide_idx,usable_slides,region_size):
