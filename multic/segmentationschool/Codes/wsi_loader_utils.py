@@ -120,7 +120,7 @@ def get_slide_data(args, wsi_directory=None):
                 for Annotation in root.findall("./Annotation"):
 
                     annotationID = Annotation.attrib['Id']
-                    if annotationID=='7':
+                    if annotationID=='8':
                         print(xmlpath)
                         exit()
                     if annotationID in classNums.keys():

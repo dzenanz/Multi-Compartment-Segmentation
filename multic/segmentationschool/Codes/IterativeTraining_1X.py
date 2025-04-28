@@ -79,11 +79,10 @@ def IterateTraining(args):
         tc=['BD','AT']
         sc=['Ob','B']
     elif organType =='kidney':
-        classnames=['interstitium','medulla','glomerulus','sclerotic glomerulus','tubule','arterial tree']
-        classes={}
-        isthing=[0,0,1,1,1,1]
-        xml_color = [[0,255,0], [0,255,255], [255,255,0],[0,0,255], [255,0,0], [0,128,255]]
-        tc=['G','SG','T','A']
+        classnames=['interstitium','medulla','glomerulus','sclerotic glomerulus','tubule','arterial tree', 'intimal fibosis']
+        isthing=[0,0,1,1,1,1,1]
+        xml_color = [[0,255,0], [0,255,255], [255,255,0],[0,0,255], [255,0,0], [0,128,255], [255,0,255]]
+        tc=['G','SG','T','A', 'IF']
         sc=['Ob','I','M','B']
     else:
         print('Provided organType not in supported types: kidney, liver')
