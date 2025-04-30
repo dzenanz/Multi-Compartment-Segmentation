@@ -154,11 +154,16 @@ def get_random_chops(slide_idx,usable_slides,region_size):
     return chops
 
 
+def random_chop(idx,usable_slides):
+    randSelect = random.randrange(0, usable_slides[idx]['num_regions'])
+    chopData = [usable_slides[idx]['slide_loc'], usable_slides[idx]['xml_loc'],
+                usable_slides[idx]['chop_array'][randSelect]]
+    return chopData
+
+
 def get_chop_data(idx,usable_slides,region_size):
     if random.random()>0.5:
-        randSelect=random.randrange(0,usable_slides[idx]['num_regions'])
-        chopData=[usable_slides[idx]['slide_loc'],usable_slides[idx]['xml_loc'],
-            usable_slides[idx]['chop_array'][randSelect]]
+        return random_chop(idx,usable_slides)
     else:
         # print(list(usable_slides[idx]['annotations'].values()))
         if sum(usable_slides[idx]['annotations'].values())==0:
@@ -168,6 +173,7 @@ def get_chop_data(idx,usable_slides,region_size):
         else:
             classIDs=list(usable_slides[idx]['annotations'].keys())
             classSamples=random.sample(classIDs,len(classIDs))
+            sampledRegionID = None
             for c in classSamples:
                 if usable_slides[idx]['annotations'][c]==0 or c == '5':
                     continue
@@ -176,6 +182,8 @@ def get_chop_data(idx,usable_slides,region_size):
                     #sampledRegionID=random.randrange(1,usable_slides[idx]['annotations'][c]+1)
                     break
 
+            if sampledRegionID is None:
+                return random_chop(idx, usable_slides)
 
             Verts = usable_slides[idx]['root'].findall("./Annotation[@Id='{}']/Regions/Region[@Id='{}']/Vertices/Vertex".format(c,sampledRegionID))
 
