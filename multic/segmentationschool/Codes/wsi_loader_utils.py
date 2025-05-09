@@ -187,13 +187,17 @@ def get_chop_data(idx,usable_slides,region_size):
 
             Verts = usable_slides[idx]['root'].findall("./Annotation[@Id='{}']/Regions/Region[@Id='{}']/Vertices/Vertex".format(c,sampledRegionID))
 
-            centroid = (Polygon([(int(float(k.attrib['X'])),int(float(k.attrib['Y']))) for k in Verts]).centroid)
+            try:
+                centroid = (Polygon([(int(float(k.attrib['X'])),int(float(k.attrib['Y']))) for k in Verts]).centroid)
             
-            randVertX=int(centroid.x)-region_size//2
-            randVertY=int(centroid.y)-region_size//2
+                randVertX=int(centroid.x)-region_size//2
+                randVertY=int(centroid.y)-region_size//2
 
-            chopData=[usable_slides[idx]['slide_loc'],usable_slides[idx]['xml_loc'],
-                [randVertY,randVertX]]
+                chopData=[usable_slides[idx]['slide_loc'],usable_slides[idx]['xml_loc'],
+                    [randVertY,randVertX]]
+            except ValueError as e:
+                print(f"Error for slide: {usable_slides[idx]['slideID']}, class {c}, region {sampledRegionID}: {e}")
+                exit(1)
            
 
     return chopData
