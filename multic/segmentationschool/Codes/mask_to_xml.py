@@ -12,10 +12,11 @@ def get_contour_points(mask, args, downsample,value, offset={'X': 0,'Y': 0}):
     pointsList = []
 
     for j in np.array(range(len(maskPoints))):
-        if len(maskPoints[j])>2:
+        if len(maskPoints[j]) > 12:  # this threshold is related to contour_subsampling_step
             if cv2.contourArea(maskPoints[j]) > args.min_size[value-1]:
-                pointList = []
-                for i in np.array(range(0,len(maskPoints[j]),4)):
+                pointList = []  # the resulting contour must have at least 3 points
+                contour_subsampling_step = 4
+                for i in np.array(range(0,len(maskPoints[j]),contour_subsampling_step)):
                     point = {'X': (maskPoints[j][i][0][0] * downsample) + offset['X'], 'Y': (maskPoints[j][i][0][1] * downsample) + offset['Y']}
                     pointList.append(point)
                 pointsList.append(pointList)
