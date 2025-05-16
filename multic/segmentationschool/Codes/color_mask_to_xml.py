@@ -18,7 +18,7 @@ GLO_ABNORMAL = np.array([255, 0, 255], dtype=np.uint8)
 ARTERY = np.array([35, 142, 107], dtype=np.uint8)
 ARTERY_IF = np.array([0, 255, 255], dtype=np.uint8)
 INTERSTITIAL_SPACE_ABNORMALITY = np.array([0, 0, 255], dtype=np.uint8)
-MISSING_STRUCTURE = np.array([0, 0, 0], dtype=np.uint8)  # background is white
+MISSING_STRUCTURE = np.array([1, 2, 3], dtype=np.uint8)  # background is white or black
 
 COLORS = [INTERSTITIAL_SPACE_ABNORMALITY, MISSING_STRUCTURE, GLO_NORMAL, GLO_ABNORMAL, TUB_NORMAL, ARTERY, ARTERY_IF]
 
