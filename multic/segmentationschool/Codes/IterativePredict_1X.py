@@ -283,7 +283,7 @@ def file_len(fname): # get txt file length (number of lines)
 
 
 def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
-    Annotations = mask_to_xml(wsiMask, dirs, args, classNum, downsample, glob_offset)
+    Annotations = mask_to_xml(wsiMask, args, classNum, downsample, glob_offset)
 
     # save xml
     folder = args.base_dir
