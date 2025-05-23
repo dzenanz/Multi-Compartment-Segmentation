@@ -188,7 +188,7 @@ def IterateTraining(args):
 
     trainer = Trainer(cfg)
     print('check and see')
-    trainer.resume_or_load(resume=False)
+    trainer.resume_or_load(resume=True)
     trainer.train()
 
     _ = os.system("echo '\nTraining completed!\n'")
