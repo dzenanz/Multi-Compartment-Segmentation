@@ -12,6 +12,8 @@ from detectron2.config import get_cfg
 from detectron2 import model_zoo
 from .get_dataset_list import decode_panoptic
 from .mask_to_xml import mask_to_xml
+from lxml import etree as ET
+from .xml_to_mask_minmax import write_minmax_to_xml
 from scipy.ndimage.morphology import binary_fill_holes
 from tiffslide import TiffSlide
 from skimage.color import rgb2hsv
@@ -291,6 +293,12 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
     _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
     print(file_name)
+    tree = ET.ElementTree(Annotations)
+    xml_file = dirs['xml_save_dir'] + "/" + dirs['fileID'] + ".xml"
+    # tree.write(xml_file, pretty_print=True, xml_declaration=False, encoding='utf-8')
+    write_minmax_to_xml(xml_file, tree)
+
+    # upload to girder
     gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)
     gc.setToken(args.girderToken)
     files = list(gc.listItem(girder_folder_id))
