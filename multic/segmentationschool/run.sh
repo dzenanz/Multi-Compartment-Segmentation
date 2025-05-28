@@ -1,14 +1,14 @@
 #!/bin/sh
-#SBATCH --account=pinaki.sarder
+#SBATCH --account=banff-aid
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=12
-#SBATCH --mem-per-cpu=7000mb
-#SBATCH --partition=gpu
-#SBATCH --gpus=a100
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=96gb
+#SBATCH --partition=community
+#SBATCH --gpus=rtx6000:2
 #SBATCH --time=72:00:00
-#SBATCH --output=hail.out
-#SBATCH --job-name="PAN-DL2"
+#SBATCH --output=job%A.log
+#SBATCH --job-name="BANFF-AID-Training1"
 echo "SLURM_JOBID="$SLURM_JOBID
 echo "SLURM_JOB_NODELIST="$SLURM_JOB_NODELIST
 echo "SLURM_NNODES="$SLURM_NNODES
@@ -16,12 +16,10 @@ echo "SLURMTMPDIR="$SLURMTMPDIR
 
 echo "working directory = "$SLURM_SUBMIT_DIR
 ulimit -s unlimited
-module list
 which python
 
 echo "Launch job"
 CUDA_LAUNCH_BLOCKING=1
-python3 segmentation_school.py --option predict --project CODEX/ --base_dir /blue/pinaki.sarder/nlucarelli/Detectron/ --modelfile /blue/pinaki.sarder/nlucarelli/Detectron/model_0214999.pth
+python3 segmentation_school.py --option train --base_dir /home/local/KHQ/dzenan.zukic/Histo/ --init_modelfile /home/local/KHQ/dzenan.zukic/Histo/model_0214999.pth --training_data_dir /data/Public/banff-aid/TrainBig/ --train_steps 2000 --eval_period 200 --num_workers 1
 
-
-echo "All Done!"
+echo "SLURM script Done!"
