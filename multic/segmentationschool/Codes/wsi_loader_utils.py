@@ -26,10 +26,10 @@ def get_image_meta(i,args):
     magy=np.round(float(slide.properties['tiffslide.mpp-y']),2)
  
     assert magx == magy
-    if magx ==0.25:
+    if 0.23 <= magx <= 0.28:
         dx=args.boxSize
         dy=args.boxSize
-    elif magx == 0.5:
+    elif 0.45 <= magx <= 0.55:
         dx=int(args.boxSize/2)
         dy=int(args.boxSize/2)
     else:
