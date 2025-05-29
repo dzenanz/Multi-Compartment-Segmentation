@@ -13,3 +13,4 @@ training
 .venv9
 .DS_Store
 **/.DS_Store
+multic.egg-info
