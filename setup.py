@@ -50,9 +50,9 @@ setup(
         'Pillow==9.5.0',
         'pandas>=0.19.2',
         'imageio>=2.3.0',
-        # 'shapely[vectorized]',
-        # 'opencv-python-headless',
-        # 'imgaug==0.4.0',
+        'shapely[vectorized]==2.0.7',
+        'opencv-python-headless<4.7',
+        'imgaug==0.4.0',
         #'sqlalchemy',
         # 'matplotlib',
         'pyvips',
@@ -79,6 +79,7 @@ setup(
         'girder-client',
         # cli
         'ctk-cli',
+        'zarr<3.0',
         # detectron2 is installed in the dockerfile, so it needs to be commented out here
         # 'detectron2 @ git+https://github.com/facebookresearch/detectron2@main',  # v0.6+patches
     ],
