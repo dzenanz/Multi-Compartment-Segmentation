@@ -96,15 +96,13 @@ def get_slide_data(args, wsi_directory=None):
 
         usable_slides=[]
         missing_slides=[]
-        iteration = 0
-        for slide_loc in all_slides:
-            iteration+=1
+        for iteration, slide_loc in enumerate(all_slides):
             slideID,slideExt=os.path.splitext(slide_loc.split(os.sep)[-1])
             xmlpath=slide_loc.replace(slideExt,'.xml')
             if os.path.isfile(xmlpath):
                 write_minmax_to_xml(xmlpath)
 
-                print(f"Gathering slide data {iteration}/{len(all_slides)} for {slideID}")
+                print(f"Gathering slide data {iteration + 1}/{len(all_slides)} for {slideID}")
                 slide =TiffSlide(slide_loc)
                 chop_array=get_choppable_regions(slide,args,slideID,slideExt,mask_out_loc)
 
