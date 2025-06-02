@@ -143,7 +143,7 @@ def IterateTraining(args):
     cfg.SOLVER.MAX_ITER = args.train_steps
     cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
     cfg.SOLVER.LRS = [0.000025,0.0000025]
-    cfg.SOLVER.STEPS = [70000,90000]
+    cfg.SOLVER.STEPS = [args.train_steps * 0.5, args.train_steps * 0.75]
     cfg.MODEL.ANCHOR_GENERATOR.SIZES = [[32],[64],[128], [256], [512], [1024]]
     cfg.MODEL.RPN.IN_FEATURES = ['p2', 'p3', 'p4', 'p5','p6','p6']
     cfg.MODEL.ANCHOR_GENERATOR.ASPECT_RATIOS = [[.1,.2,0.33, 0.5, 1.0, 2.0, 3.0,5,10]]
