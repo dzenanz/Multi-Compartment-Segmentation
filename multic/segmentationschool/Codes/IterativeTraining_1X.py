@@ -141,6 +141,7 @@ def IterateTraining(args):
 
     cfg.SOLVER.LR_policy='steps_with_lrs'
     cfg.SOLVER.MAX_ITER = args.train_steps
+    cfg.SOLVER.CHECKPOINT_PERIOD = 1000  # default is 5000
     cfg.SOLVER.BASE_LR = 0.00025  # pick a good LR
     cfg.SOLVER.LRS = [0.000025,0.0000025]
     cfg.SOLVER.STEPS = [args.train_steps * 0.5, args.train_steps * 0.75]
