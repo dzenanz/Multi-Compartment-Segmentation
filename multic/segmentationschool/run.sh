@@ -20,6 +20,6 @@ which python
 
 echo "Launch job"
 CUDA_LAUNCH_BLOCKING=1
-python3 segmentation_school.py --option train --base_dir /home/local/KHQ/dzenan.zukic/Histo/ --init_modelfile /home/local/KHQ/dzenan.zukic/Histo/model_0214999.pth --training_data_dir /data/Public/banff-aid/TrainBig/ --train_steps 2000 --eval_period 200 --num_workers 1
+python3 segmentation_school.py --option train --base_dir /home/local/KHQ/dzenan.zukic/Histo/ --init_modelfile /home/local/KHQ/dzenan.zukic/Histo/model_0214999.pth --training_data_dir /data/Public/banff-aid/TrainBig/ --train_steps 200000 --eval_period 500 --num_workers 2
 
 echo "SLURM script Done!"
