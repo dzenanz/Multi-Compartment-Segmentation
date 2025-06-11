@@ -15,9 +15,13 @@ def predict_all(model_file, in_directory, out_directory):
     arg_string = f'--base_dir "{out_directory}" --modelfile "{model_file}"'
     for filename in os.listdir(in_directory):
         if filename.endswith(".svs"):
-            file_path = os.path.join(in_directory, filename)
-            arg_string += f' --files "{file_path}"'
-            ok = True
+            outfile = os.path.join(out_directory, filename[:-4] + ".xml")
+            if os.path.exists(outfile):
+                print(f"Skipping {filename}, output exists: {outfile}")
+            else:
+                file_path = os.path.join(in_directory, filename)
+                arg_string += f' --files "{file_path}"'
+                ok = True
 
     if ok:
         parser = get_argument_parser()
