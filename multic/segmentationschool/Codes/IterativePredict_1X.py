@@ -108,11 +108,11 @@ def predict(args):
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.roi_thresh
         predictor = DefaultPredictor(cfg)
         broken_slides=[]
-        for wsi in args.files:
+        for f, wsi in enumerate(args.files):
             extsplit = os.path.splitext(wsi)
             basename = extsplit[0]
             extname = extsplit[-1]
-            print(basename)
+            print(wsi)
 
             try:
                 slide=TiffSlide(wsi)
@@ -131,7 +131,7 @@ def predict(args):
                 offsetx=0
                 offsety=0
 
-            print(dim_x,dim_y)
+            print(f"Size: {dim_x} x {dim_y}")
             fileID=basename.split(os.sep)
             dirs['fileID'] = fileID[-1]
             dirs['extension'] = extname
@@ -142,7 +142,7 @@ def predict(args):
 
             index_y=np.array(range(offsety,dim_y+offsety,step))
             index_x=np.array(range(offsetx,dim_x+offsetx,step))
-            print('Getting thumbnail mask to identify predictable tissue...')
+            # print('Getting thumbnail mask to identify predictable tissue...')
             fullSize=slide.level_dimensions[0]
             resRatio= args.chop_thumbnail_resolution
             ds_1=fullSize[0]/resRatio
@@ -160,9 +160,9 @@ def predict(args):
             binary=(g>0.05).astype('bool')
             binary=binary_fill_holes(binary)
 
-            print('Segmenting tissue ...\n')
+            # print('Segmenting tissue ...\n')
             totalpatches=len(index_x)*len(index_y)
-            with tqdm(total=totalpatches,unit='image',colour='green',desc='Total WSI progress') as pbar:
+            with tqdm(total=totalpatches,unit='image',colour='green',desc=f"WSI {f + 1}/{len(args.files)}") as pbar:
                 for i,j in coordinate_pairs(index_y,index_x):
 
                     yEnd = min(dim_y+offsety,i+region_size)
@@ -211,12 +211,12 @@ def predict(args):
                 print(f"Writing mask to file: {mask_filename}")
                 cv2.imwrite(mask_filename, wsiMask)
 
-            print('\n\nStarting XML construction: ')
+            # print('\n\nStarting XML construction: ')
             if extname=='.scn':
-                print('here writing 1')
+                # print('here writing 1')
                 xml_suey(wsiMask=wsiMask, dirs=dirs, args=args, classNum=classNum, downsample=downsample,glob_offset=[offsetx,offsety])
             else:
-                print('here writing 2')
+                # print('here writing 2')
                 xml_suey(wsiMask=wsiMask, dirs=dirs, args=args, classNum=classNum, downsample=downsample,glob_offset=[0,0])
 
         print('\nand run [--option train]\033[0m\n')
@@ -290,9 +290,9 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
     # save xml
     folder = args.base_dir
     girder_folder_id = folder.split(os.sep)[-2]
-    _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
+    # _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
-    print(file_name)
+    # print(file_name)
     tree = ET.ElementTree(Annotations)
     xml_file = dirs['xml_save_dir'] + "/" + dirs['fileID'] + ".xml"
     # tree.write(xml_file, pretty_print=True, xml_declaration=False, encoding='utf-8')
