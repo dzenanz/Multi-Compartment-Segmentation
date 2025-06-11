@@ -16,11 +16,11 @@ def convert_xml_json(root, names, colorList=None, alpha=0.4):
     assert len(anns) <= len(names)
 
     data = []
+    element = []
+    dataDict = dict()
     for n, child in enumerate(anns):
-        dataDict = dict()
         name = names[n]
         _ = os.system("echo 'Building JSON layer: [{}]\n'".format(name))
-        element = []
         reg = child.find('Regions')
         for i in reg.findall('Region'):
             eleDict = dict()
@@ -46,9 +46,10 @@ def convert_xml_json(root, names, colorList=None, alpha=0.4):
                 points.append(eachPoint)
             eleDict["points"] = points
             eleDict["type"] = "polyline"
+            eleDict["group"] = name
             element.append(eleDict)
-        dataDict["elements"] = element
-        dataDict["name"] = name
-        data.append(dataDict)
+    dataDict["elements"] = element
+    dataDict["name"] = "prediction"
+    data.append(dataDict)
 
     return data

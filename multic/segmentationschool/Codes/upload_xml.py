@@ -32,8 +32,8 @@ def upload1(image_filename, xml_file):
         return
     annotations_xml = ET.parse(xml_file)
     annotations_json = convert_xml_json(annotations_xml, NAMES)
-    for annot in tqdm(annotations_json, desc="Annotations", position=0):
-        retval = gc.post(path='annotation', parameters={'itemId': item_dict[image_filename]}, data=json.dumps(annot))
+    retval = gc.post(path='annotation', parameters={'itemId': item_dict[image_filename]},
+                     data=json.dumps(annotations_json[0]))
 
 
 def upload_all(in_directory):
