@@ -150,7 +150,12 @@ def predict(args):
             resRatio= args.chop_thumbnail_resolution
             ds_1=fullSize[0]/resRatio
             ds_2=fullSize[1]/resRatio
-            thumbIm=np.array(slide.get_thumbnail((ds_1,ds_2)))
+            try:
+                thumbIm=np.array(slide.get_thumbnail((ds_1,ds_2)))
+            except Exception as e:
+                print(f"Error opening thumbnail of slide {wsi}: {e}")
+                broken_slides.append(wsi)
+                continue
             if extname =='.scn':
                 xStt=int(offsetx/resRatio)
                 xStp=int((offsetx+dim_x)/resRatio)
