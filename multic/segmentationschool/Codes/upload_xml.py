@@ -31,7 +31,7 @@ def upload1(image_filename, xml_file):
         print(f"Image {image_filename} not found in 'WSIs/To Review' folder.")
         return
     annotations_xml = ET.parse(xml_file)
-    annotations_json = convert_xml_json(annotations_xml, NAMES)
+    annotations_json = convert_xml_json(annotations_xml, NAMES, alpha=0.2)
     retval = gc.post(path='annotation', parameters={'itemId': item_dict[image_filename]},
                      data=json.dumps(annotations_json[0]))
 
