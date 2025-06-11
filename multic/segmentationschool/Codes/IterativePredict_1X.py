@@ -5,15 +5,15 @@ import json
 import sys
 import girder_client
 import glob
-from .xml_to_json import convert_xml_json
+from xml_to_json import convert_xml_json
 from tqdm import tqdm
 from detectron2.engine import DefaultPredictor
 from detectron2.config import get_cfg
 from detectron2 import model_zoo
-from .get_dataset_list import decode_panoptic
-from .mask_to_xml import mask_to_xml
+from get_dataset_list import decode_panoptic
+from mask_to_xml import mask_to_xml
 from lxml import etree as ET
-from .xml_to_mask_minmax import write_minmax_to_xml
+from xml_to_mask_minmax import write_minmax_to_xml
 from scipy.ndimage.morphology import binary_fill_holes
 from tiffslide import TiffSlide
 from skimage.color import rgb2hsv

@@ -1,4 +1,4 @@
-from .utils import IdGenerator, id2rgb
+from utils import IdGenerator, id2rgb
 from skimage.measure import label
 from skimage.io import imsave#,imread
 import random
