@@ -68,9 +68,9 @@ def predict(args):
     downsample = int(args.downsampleRateHR**.5)
     region_size = int(args.boxSize*(downsample))
     step = int((region_size-(args.bordercrop*2))*(1-args.overlap_percentHR))
-    print('Handcoded iteration')
+    # print('Handcoded iteration')
     iteration=1
-    print(iteration)
+    # print(iteration)
     dirs['xml_save_dir'] = args.base_dir
     if iteration == 'none':
         print('ERROR: no trained models found \n\tplease use [--option train]')
@@ -108,7 +108,7 @@ def predict(args):
         cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.roi_thresh
         predictor = DefaultPredictor(cfg)
         broken_slides=[]
-        for wsi in [args.files]:
+        for wsi in args.files:
             extsplit = os.path.splitext(wsi)
             basename = extsplit[0]
             extname = extsplit[-1]
@@ -132,10 +132,10 @@ def predict(args):
                 offsety=0
 
             print(dim_x,dim_y)
-            fileID=basename.split('/')
+            fileID=basename.split(os.sep)
             dirs['fileID'] = fileID[-1]
             dirs['extension'] = extname
-            dirs['file_name'] = wsi.split('/')[-1]
+            dirs['file_name'] = wsi.split(os.sep)[-1]
 
 
             wsiMask = np.zeros([dim_y, dim_x], dtype='uint8')
@@ -289,7 +289,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
 
     # save xml
     folder = args.base_dir
-    girder_folder_id = folder.split('/')[-2]
+    girder_folder_id = folder.split(os.sep)[-2]
     _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
     print(file_name)
@@ -297,6 +297,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
     xml_file = dirs['xml_save_dir'] + "/" + dirs['fileID'] + ".xml"
     # tree.write(xml_file, pretty_print=True, xml_declaration=False, encoding='utf-8')
     write_minmax_to_xml(xml_file, tree)
+    return  # skip upload to girder for now
 
     # upload to girder
     gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)

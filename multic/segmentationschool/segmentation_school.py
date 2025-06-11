@@ -112,7 +112,7 @@ def savetime(args, starttime):
         #     timefile.write('\n' + args.option +'\t'+ str(time.time()-starttime))
 
 
-if __name__ == '__main__':
+def get_argument_parser():
     print(f"Command line arguments [DEBUG]:\n{sys.argv}")
     parser = argparse.ArgumentParser()
 
@@ -122,8 +122,8 @@ if __name__ == '__main__':
         help='girderApiUrl')
     parser.add_argument('--girderToken', dest='girderToken', default=' ' ,type=str,
         help='girderToken')
-    parser.add_argument('--files', dest='files', default=' ' ,type=str,
-        help='files')
+    parser.add_argument('--files', dest='files', default=[], type=str,
+        help='files', action="append")
     # option
     parser.add_argument('--option', dest='option', default=' ' ,type=str,
         help='option for [new, train, predict, validate]')
@@ -301,8 +301,11 @@ if __name__ == '__main__':
     parser.add_argument('--num_workers', dest='num_workers', default=1 ,type=int,
         help='Number of workers for data loader')
 
+    return parser
 
 
-
+if __name__ == '__main__':
+    print(f"Command line arguments [DEBUG]:\n{sys.argv}")
+    parser = get_argument_parser()
     args = parser.parse_args()
     main(args=args)
