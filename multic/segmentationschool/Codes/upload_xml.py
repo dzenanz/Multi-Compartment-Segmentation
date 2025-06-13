@@ -32,6 +32,9 @@ def upload1(image_filename, xml_file):
         return
     annotations_xml = ET.parse(xml_file)
     annotations_json = convert_xml_json(annotations_xml, NAMES, alpha=0.2)
+    if len(gc.get('annotation', parameters={'itemId': item_dict[image_filename]})):
+        print(f"Annotations for {image_filename} already exist, deleting existing version.")
+        gc.delete(f'annotation/item/{item_dict[image_filename]}')
     retval = gc.post(path='annotation', parameters={'itemId': item_dict[image_filename]},
                      data=json.dumps(annotations_json[0]))
 
