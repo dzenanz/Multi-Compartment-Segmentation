@@ -18,7 +18,7 @@ if "GIRDER_API_KEY" not in os.environ:
     sys.exit(1)
 gc = girder_client.GirderClient(apiUrl=GIRDER_API_URL)
 girderToken = gc.authenticate(apiKey=os.environ["GIRDER_API_KEY"])
-files = list(gc.listItem('6818fa1e08cc9f7f924bb982'))  # "WSIs/To Review"
+files = list(gc.listItem('6841a1bca36ba58aadb233ef'))  # "WSIs/Predictions"
 # dict to link filename to gc id
 item_dict = dict()
 for file in files:
@@ -28,7 +28,7 @@ for file in files:
 
 def upload1(image_filename, xml_file):
     if image_filename not in item_dict:
-        print(f"Image {image_filename} not found in 'WSIs/To Review' folder.")
+        print(f"Image {image_filename} not found on the server. Images need to be uploaded separately.")
         return
     annotations_xml = ET.parse(xml_file)
     annotations_json = convert_xml_json(annotations_xml, NAMES, alpha=0.2)
