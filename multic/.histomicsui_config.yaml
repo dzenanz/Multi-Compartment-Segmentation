@@ -59,7 +59,7 @@ annotationGroups:
       lineColor: rgb(255, 0, 0)
       lineWidth: 4
     -
-      id: arteries
+      id: arteries/arterioles
       label: Arteries/arterioles
       hotkey: a
       fillColor: rgba(0, 0, 255, 0.2)
