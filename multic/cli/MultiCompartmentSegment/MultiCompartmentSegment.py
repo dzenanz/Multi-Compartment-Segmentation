@@ -19,7 +19,7 @@ DEFAULT_VALS = {
         'downsampleRateHR':1,
         'Mag20X':False,
         'roi_thresh':0.01,
-        'min_size':[30,30,30,30,30,30],
+        'min_size':[30,30,30,30,30,30,30],
         'bordercrop':300,
         'show_interstitium':True
     }
