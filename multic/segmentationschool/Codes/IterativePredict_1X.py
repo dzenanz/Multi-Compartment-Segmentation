@@ -243,16 +243,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
     _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
     print(file_name)
-    gc = girder_client.GirderClient(apiUrl=args.girderApiUrl)
-    gc.setToken(args.girderToken)
-    files = list(gc.listItem(girder_folder_id))
-    # dict to link filename to gc id
-    item_dict = dict()
-    for file in files:
-        d = {file['name']:file['_id']}
-        item_dict.update(d)
-    print(item_dict)
-    print(item_dict[file_name])
+    gc = args.gc
     annots = convert_xml_json(Annotations, NAMES)
     for annot in annots:
         _ = gc.post(path='annotation',parameters={'itemId':args.item_id}, data = json.dumps(annot))
