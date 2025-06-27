@@ -120,9 +120,10 @@ def predict(args):
 
     print(dim_x,dim_y)
     fileID=basename.split('/')
-    # dirs['fileID'] = fileID[-1]
-    # dirs['extension'] = extname
-    # dirs['file_name'] = wsi.split('/')[-1]
+    dirs = {}
+    dirs['fileID'] = fileID[-1]
+    dirs['extension'] = extname
+    dirs['file_name'] = wsi.split('/')[-1]
 
 
     wsiMask = np.zeros([dim_y, dim_x], dtype='uint8')
@@ -202,10 +203,10 @@ def predict(args):
         print('\n\nStarting XML construction: ')
 
         if extname=='.scn':
-            print('here writing 1')
+            # print('here writing 1')
             xml_suey(wsiMask=wsiMask, args=args, classNum=classNum, downsample=downsample,glob_offset=[offsetx,offsety])
         else:
-            print('here writing 2')
+            # print('here writing 2')
             xml_suey(wsiMask=wsiMask, args=args, classNum=classNum, downsample=downsample,glob_offset=[0,0])
 
 def coordinate_pairs(v1,v2):
