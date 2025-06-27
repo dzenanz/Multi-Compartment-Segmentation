@@ -112,14 +112,15 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends memcached && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5.1 && \
+    pip install --no-cache-dir tensorboard cmake onnx && \
+    pip install --no-cache-dir torch==1.10  torchaudio==0.10 torchvision==0.11.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html && \
+    python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html
+
 COPY . $mc_path/
 WORKDIR $mc_path
 
-RUN pip install --no-cache-dir --upgrade --ignore-installed pip setuptools==69.5.1 && \
-    pip install --no-cache-dir .  && \
-    pip install --no-cache-dir tensorboard cmake onnx && \
-    pip install --no-cache-dir torch==1.10  torchaudio==0.10 torchvision==0.11.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html && \
-    python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.10/index.html && \
+RUN pip install --no-cache-dir .  && \
     rm -rf /root/.cache/pip/*
 
 RUN python --version && pip --version && pip freeze
