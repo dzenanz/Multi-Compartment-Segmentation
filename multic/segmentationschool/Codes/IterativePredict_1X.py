@@ -195,7 +195,7 @@ def predict(args):
 
         slide.close()
 
-        if args.base_dir and os.path.exists(args.base_dir):
+        if "base_dir" in args and args.base_dir and os.path.exists(args.base_dir):
             mask_filename = args.base_dir + "/" + dirs['fileID'] + ".png"
             print(f"Writing mask to file: {mask_filename}")
             cv2.imwrite(mask_filename, wsiMask)
