@@ -17,7 +17,7 @@ from .mask_to_xml import mask_to_xml
 from .xml_to_json import convert_xml_json
 
 NAMES = ['cortical_interstitium', 'medullary_interstitium', 'non_globally_sclerotic_glomeruli',
-         'globally_sclerotic_glomeruli', 'tubules', 'arteries/arterioles']
+         'globally_sclerotic_glomeruli', 'tubules', 'arteries/arterioles', 'intimal_fibrosis']
 
 """
 Pipeline code to segment regions from WSI
