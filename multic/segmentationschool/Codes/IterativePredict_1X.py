@@ -121,7 +121,6 @@ def predict(args):
     dirs['fileID'] = fileID[-1]
     dirs['extension'] = extname
     dirs['file_name'] = wsi.split('/')[-1]
-    args['base_dir'] = os.path.dirname(wsi)
 
     wsiMask = np.zeros([dim_y, dim_x], dtype='uint8')
 
@@ -240,7 +239,7 @@ def xml_suey(wsiMask, dirs, args, classNum, downsample, glob_offset):
     Annotations = mask_to_xml(wsiMask, args, classNum, downsample, glob_offset)
 
     # save xml
-    folder = args.base_dir
+    folder = os.path.dirname(args.file)
     girder_folder_id = folder.split('/')[-2]
     _ = os.system("echo 'Using data from girder_client Folder: {}\n'".format(folder))
     file_name = dirs['file_name']
