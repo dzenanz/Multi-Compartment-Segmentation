@@ -121,6 +121,7 @@ def predict(args):
     dirs['fileID'] = fileID[-1]
     dirs['extension'] = extname
     dirs['file_name'] = wsi.split('/')[-1]
+    args['base_dir'] = os.path.dirname(wsi)
 
     wsiMask = np.zeros([dim_y, dim_x], dtype='uint8')
 
