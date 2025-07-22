@@ -4,9 +4,9 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=96gb
-#SBATCH --partition=emergency
+#SBATCH --partition=priority
 #SBATCH --gpus=rtx6000:1
-#SBATCH --time=28-23:00:00
+#SBATCH --time=7-0:00:00
 #SBATCH --output=job%A.log
 #SBATCH --job-name="PASfHE"
 echo "SLURM_JOBID="$SLURM_JOBID
