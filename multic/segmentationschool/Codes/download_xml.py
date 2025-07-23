@@ -25,7 +25,10 @@ girderToken = gc.authenticate(apiKey=os.environ["GIRDER_API_KEY"])
 
 def download1(girder_item_id, xml_file):
     annotations = gc.get(path=f'/annotation/item/{girder_item_id}')
-    assert len(annotations) == 1, f"Expected exactly one annotation for item {girder_item_id}, found {len(annotations)}"
+    if len(annotations) != 1:
+        print(f"Expected exactly one annotation for item {girder_item_id}, found {len(annotations)}")
+    if len(annotations) == 0:
+        return
     annotation = annotations[0]["annotation"]
     assert annotation["name"] == "prediction", f"Expected annotation name 'prediction', found '{annotation.name}'"
     elements = annotation['elements']
