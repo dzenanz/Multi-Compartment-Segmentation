@@ -18,7 +18,7 @@ if "GIRDER_API_KEY" not in os.environ:
     sys.exit(1)
 gc = girder_client.GirderClient(apiUrl=GIRDER_API_URL)
 girderToken = gc.authenticate(apiKey=os.environ["GIRDER_API_KEY"])
-files = list(gc.listItem('6862affed4a6816f3714f71e'))  # "WSIs/manualMix6k"
+files = list(gc.listItem('6862affed4a6816f3714f71e'))  # "WSIs/auto_predictions"
 # dict to link filename to gc id
 item_dict = dict()
 for file in files:
